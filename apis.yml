@@ -1,0 +1,63 @@
+aid: leadsquared
+name: LeadSquared
+description: >-
+  LeadSquared is a marketing automation and CRM platform that helps businesses
+  capture, manage, nurture, and convert leads across sales, marketing, and
+  service workflows. It offers Sales CRM, Service CRM, marketing automation,
+  field force automation, and a no-code/low-code platform for building
+  industry-specific customer experiences. The LeadSquared REST API provides
+  access to core platform resources like leads, opportunities, activities,
+  tasks, and users using API key authentication.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Marketing Automation
+  - CRM
+  - Sales Automation
+  - Lead Management
+  - Customer Engagement
+  - Field Force Automation
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/leadsquared/refs/heads/main/apis.yml
+created: '2026-05-11'
+modified: '2026-05-11'
+specificationVersion: '0.19'
+apis:
+  - aid: leadsquared:rest-api
+    name: LeadSquared REST API
+    description: >-
+      REST API for managing leads, opportunities, activities, tasks, users,
+      campaigns, and other CRM resources in LeadSquared. Includes Sales CRM,
+      Service CRM, Async, and Portal APIs along with Lapps, Batch Jobs,
+      Webhooks, and Mavis Database developer tools. Authentication uses
+      AccessKey and SecretKey query parameters or headers tied to a region-
+      specific API host.
+    humanURL: https://apidocs.leadsquared.com/overview/
+    baseURL: https://api.leadsquared.com
+    tags:
+      - CRM
+      - Marketing Automation
+      - Lead Management
+      - Sales CRM
+      - Service CRM
+    properties:
+      - type: Documentation
+        url: https://apidocs.leadsquared.com/overview/
+      - type: Authentication
+        url: https://apidocs.leadsquared.com/authentication/
+      - type: API Host
+        url: https://apidocs.leadsquared.com/api-host/
+      - type: Postman Collection
+        url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
+common:
+  - type: Website
+    url: https://www.leadsquared.com
+  - type: Documentation
+    url: https://apidocs.leadsquared.com
+  - type: Pricing
+    url: https://www.leadsquared.com/pricing/
+  - type: Sign Up
+    url: https://www.leadsquared.com/free-trial/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
