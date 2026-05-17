@@ -56,7 +56,7 @@ common:
     url: https://apidocs.leadsquared.com
   - type: Pricing
     url: https://www.leadsquared.com/pricing/
-  - type: Sign Up
+  - type: SignUp
     url: https://www.leadsquared.com/free-trial/
 maintainers:
   - FN: Kin Lane
