@@ -50,6 +50,10 @@ apis:
       - type: Postman Collection
         url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/leadsquared
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/leadsquared
   - type: Website
     url: https://www.leadsquared.com
   - type: Documentation
