@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LeadSquared REST API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessKey",
+      "value": "{{accessKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/v2/LeadManagement.svc/Lead.Create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new lead in LeadSquared. At least one unique field\n(such as EmailAddress or Phone) must be provided.\n"
+        },
+        {
+          "info": {
+            "name": "Get a lead by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/v2/LeadManagement.svc/Leads.GetById",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query",
+                "description": "Unique identifier of the lead"
+              }
+            ]
+          },
+          "docs": "Retrieve a single lead by its unique ProspectID."
+        },
+        {
+          "info": {
+            "name": "Quick search leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{host}/v2/LeadManagement.svc/Leads.GetByQuickSearch",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "query",
+                "description": "Search value"
+              }
+            ]
+          },
+          "docs": "Search leads by FirstName, LastName, EmailAddress, Phone, Mobile,\nCompany, City, or Country. Mirrors the in-app Quick Search box.\n"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post an activity on a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/v2/ProspectActivity.svc/Create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a custom activity event against a lead. The\nRelatedProspectId identifies the lead, ActivityEvent is the\nconfigured event code.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
