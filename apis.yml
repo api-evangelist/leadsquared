@@ -9,7 +9,7 @@ description: >-
   access to core platform resources like leads, opportunities, activities,
   tasks, and users using API key authentication.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Marketing Automation
   - CRM
