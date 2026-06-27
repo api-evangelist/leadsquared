@@ -47,7 +47,7 @@ apis:
         url: https://apidocs.leadsquared.com/authentication/
       - type: API Host
         url: https://apidocs.leadsquared.com/api-host/
-      - type: Postman Collection
+      - type: PostmanCollection
         url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
 common:
   - type: GitHubOrganization
@@ -60,7 +60,7 @@ common:
     url: https://apidocs.leadsquared.com
   - type: Pricing
     url: https://www.leadsquared.com/pricing/
-  - type: SignUp
+  - type: Signup
     url: https://www.leadsquared.com/free-trial/
 maintainers:
   - FN: Kin Lane
