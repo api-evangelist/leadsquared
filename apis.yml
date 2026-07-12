@@ -50,6 +50,10 @@ apis:
       - type: PostmanCollection
         url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
 common:
+  - type: DomainSecurity
+    url: security/leadsquared-domain-security.yml
+  - type: Authentication
+    url: authentication/leadsquared-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/leadsquared
   - type: LinkedIn

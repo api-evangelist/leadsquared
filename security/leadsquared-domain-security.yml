@@ -1,0 +1,26 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.leadsquared.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 15 02:05:01 2026 GMT
+  hsts: false
+- host: apidocs.leadsquared.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 12 08:45:45 2026 GMT
+  hsts: false
+- host: api.leadsquared.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Dec  3 23:59:59 2026 GMT
+  hsts: null
+domains:
+- domain: leadsquared.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none

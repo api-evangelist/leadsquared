@@ -1,0 +1,21 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/leadsquared-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - query
+schemes:
+- name: AccessKeyAuth
+  type: apiKey
+  in: query
+  parameter: accessKey
+  sources:
+  - openapi/leadsquared-openapi.yml
+- name: SecretKeyAuth
+  type: apiKey
+  in: query
+  parameter: secretKey
+  sources:
+  - openapi/leadsquared-openapi.yml
