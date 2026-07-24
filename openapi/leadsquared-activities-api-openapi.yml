@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: LeadSquared REST Activities API
+  version: '2.0'
+  description: 'REST API for managing leads, opportunities, and activities in
+
+    LeadSquared. Authentication uses an AccessKey and SecretKey passed
+
+    as query parameters. The API host is region-specific; substitute
+
+    your tenant API host for the {host} server variable.
+
+
+    Source documentation: https://apidocs.leadsquared.com/
+
+    '
+servers:
+- url: https://{host}/v2
+  description: Region-specific LeadSquared API host
+  variables:
+    host:
+      default: api.leadsquared.com
+      description: Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)
+security:
+- AccessKeyAuth: []
+  SecretKeyAuth: []
+tags:
+- name: Activities
+  description: Activity events on leads
+paths:
+  /ProspectActivity.svc/Create:
+    post:
+      operationId: postActivity
+      summary: Post an activity on a lead
+      description: 'Create a custom activity event against a lead. The
+
+        RelatedProspectId identifies the lead, ActivityEvent is the
+
+        configured event code.
+
+        '
+      tags:
+      - Activities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ActivityCreate'
+            example:
+              RelatedProspectId: bd595fc2-3678-4004-9ac6-65bfd1caadb5
+              ActivityEvent: 201
+              ActivityNote: Your Activity Note
+              ProcessFilesAsync: true
+              ActivityDateTime: '2015-10-11 12:13:44'
+              Fields:
+              - SchemaName: mx_Custom_1
+                Value: value
+      responses:
+        '200':
+          description: Activity created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateResponse'
+components:
+  schemas:
+    ActivityCreate:
+      type: object
+      required:
+      - RelatedProspectId
+      - ActivityEvent
+      properties:
+        RelatedProspectId:
+          type: string
+        ActivityEvent:
+          type: integer
+        ActivityNote:
+          type: string
+        ProcessFilesAsync:
+          type: boolean
+        ActivityDateTime:
+          type: string
+          description: Timestamp in "yyyy-mm-dd hh:mm:ss" format
+        Fields:
+          type: array
+          items:
+            type: object
+            properties:
+              SchemaName:
+                type: string
+              Value:
+                type: string
+    CreateResponse:
+      type: object
+      properties:
+        Status:
+          type: string
+          example: Success
+        Message:
+          type: object
+          properties:
+            Id:
+              type: string
+              example: cc3fef18-960b-4a60-98c0-af2ab61cee80
+  securitySchemes:
+    AccessKeyAuth:
+      type: apiKey
+      in: query
+      name: accessKey
+    SecretKeyAuth:
+      type: apiKey
+      in: query
+      name: secretKey
