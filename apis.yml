@@ -9,7 +9,19 @@ description: >-
   access to core platform resources like leads, opportunities, activities,
   tasks, and users using API key authentication.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/leadsquared.png
 tags:
   - Marketing Automation
   - CRM
@@ -23,32 +35,50 @@ created: '2026-05-11'
 modified: '2026-05-11'
 specificationVersion: '0.19'
 apis:
-  - aid: leadsquared:rest-api
-    name: LeadSquared REST API
-    description: >-
-      REST API for managing leads, opportunities, activities, tasks, users,
-      campaigns, and other CRM resources in LeadSquared. Includes Sales CRM,
-      Service CRM, Async, and Portal APIs along with Lapps, Batch Jobs,
-      Webhooks, and Mavis Database developer tools. Authentication uses
-      AccessKey and SecretKey query parameters or headers tied to a region-
-      specific API host.
-    humanURL: https://apidocs.leadsquared.com/overview/
-    baseURL: https://api.leadsquared.com
-    tags:
-      - CRM
-      - Marketing Automation
-      - Lead Management
-      - Sales CRM
-      - Service CRM
-    properties:
-      - type: Documentation
-        url: https://apidocs.leadsquared.com/overview/
-      - type: Authentication
-        url: https://apidocs.leadsquared.com/authentication/
-      - type: API Host
-        url: https://apidocs.leadsquared.com/api-host/
-      - type: PostmanCollection
-        url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
+- aid: leadsquared:rest-api
+  name: LeadSquared REST API
+  description: >-
+    REST API for managing leads, opportunities, activities, tasks, users, campaigns, and other CRM resources
+    in LeadSquared. Includes Sales CRM, Service CRM, Async, and Portal APIs along with Lapps, Batch Jobs,
+    Webhooks, and Mavis Database developer tools. Authentication uses AccessKey and SecretKey query parameters
+    or headers tied to a region- specific API host.
+  humanURL: https://apidocs.leadsquared.com/overview/
+  baseURL: https://api.leadsquared.com
+  tags:
+  - CRM
+  - Marketing Automation
+  - Lead Management
+  - Sales CRM
+  - Service CRM
+  properties:
+  - type: Documentation
+    url: https://apidocs.leadsquared.com/overview/
+  - type: Authentication
+    url: https://apidocs.leadsquared.com/authentication/
+  - type: API Host
+    url: https://apidocs.leadsquared.com/api-host/
+  - type: PostmanCollection
+    url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
+- aid: leadsquared:leadsquared-activities-api
+  name: LeadSquared Activities API
+  description: Activity events on leads
+  humanURL: https://apidocs.leadsquared.com/overview/
+  baseURL: https://api.leadsquared.com
+  tags:
+  - Activities
+  properties:
+  - type: OpenAPI
+    url: openapi/leadsquared-activities-api-openapi.yml
+- aid: leadsquared:leadsquared-leads-api
+  name: LeadSquared Leads API
+  description: Lead create, get, and search
+  humanURL: https://apidocs.leadsquared.com/overview/
+  baseURL: https://api.leadsquared.com
+  tags:
+  - Leads
+  properties:
+  - type: OpenAPI
+    url: openapi/leadsquared-leads-api-openapi.yml
 common:
   - type: AgenticAccess
     url: agentic-access/leadsquared-agentic-access.yml
