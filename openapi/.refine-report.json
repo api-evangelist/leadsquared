@@ -1,0 +1,16 @@
+{
+  "provider": "leadsquared",
+  "sources": [
+    "leadsquared-activities-api-openapi.yml",
+    "leadsquared-leads-api-openapi.yml"
+  ],
+  "outputs": [
+    "leadsquared-activities-api-openapi.yml",
+    "leadsquared-leads-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
