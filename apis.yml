@@ -10,17 +10,27 @@ description: >-
   tasks, and users using API key authentication.
 type: Index
 accessModel:
-  pricing: unknown
-  onboarding: self-serve
+  pricing: published
+  onboarding: sales-gated
   trial: false
   try_now: false
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Sales-gated onboarding, list pricing published
+  confidence: high
   source:
-  - authentication
-  generated: '2026-07-22'
-  method: derived
+  - https://www.leadsquared.com/sales-crm-pricing/
+  - https://www.leadsquared.com/marketing-automation-pricing/
+  - https://www.leadsquared.com/free-trial/
+  note: >-
+    Corrected 2026-08-13. The previous derived value said "self-serve signup"; there
+    is no self-serve signup. https://www.leadsquared.com/free-trial/ redirects to
+    https://www.leadsquared.com/book-demo/ (HTTP 200 after redirect), so the only
+    entry point is a sales demo request. List prices ARE published for Sales CRM
+    ($60/$100 per user per month) and Marketing Automation ($2,000/$3,500 per account
+    per year). API keys are issued inside an existing tenant, so a developer cannot
+    obtain credentials without a commercial relationship.
+  generated: '2026-08-13'
+  method: probed
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/leadsquared.png
 tags:
   - Marketing Automation
@@ -32,7 +42,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/leadsquared/refs/heads/main/apis.yml
 created: '2026-05-11'
-modified: '2026-05-11'
+modified: '2026-08-13'
 specificationVersion: '0.19'
 apis:
 - aid: leadsquared:rest-api
@@ -59,6 +69,29 @@ apis:
     url: https://apidocs.leadsquared.com/api-host/
   - type: PostmanCollection
     url: https://apidocs.leadsquared.com/leadsquared-run-in-postman/
+- aid: leadsquared:async-api
+  name: LeadSquared Async API
+  description: >-
+    Queued, retrying variants of the highest-volume LeadSquared write operations —
+    Capture Leads, Update a Lead, Post an Activity on a Lead, Create a Lead and
+    Activity, Capture Opportunities, Update an Opportunity and Post a Call Log. A
+    submission returns a RequestId which is then polled on a matching status
+    endpoint, with a metrics endpoint per operation. Requests are accepted and
+    retried up to 10 times even while the core platform is unavailable, which is the
+    documented way to keep user-facing capture paths off the 5-second throttle.
+    Authentication adds an x-api-key header to the accessKey/secretKey pair; the
+    status endpoints need only x-api-key. Hosts are regional, mirroring the REST API.
+  humanURL: https://apidocs.leadsquared.com/async-api/
+  baseURL: https://asyncapi.leadsquared.com
+  tags:
+  - Async
+  - Lead Management
+  - Queueing
+  properties:
+  - type: Documentation
+    url: https://apidocs.leadsquared.com/async-api/
+  - type: Authentication
+    url: authentication/leadsquared-authentication.yml
 - aid: leadsquared:leadsquared-activities-api
   name: LeadSquared Activities API
   description: Activity events on leads
@@ -69,6 +102,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/leadsquared-activities-api-openapi.yml
+  - type: Overlay
+    url: overlays/leadsquared-activities-api-overlay.yaml
 - aid: leadsquared:leadsquared-leads-api
   name: LeadSquared Leads API
   description: Lead create, get, and search
@@ -79,6 +114,8 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/leadsquared-leads-api-openapi.yml
+  - type: Overlay
+    url: overlays/leadsquared-leads-api-overlay.yaml
 common:
   - type: AgenticAccess
     url: agentic-access/leadsquared-agentic-access.yml
@@ -95,9 +132,72 @@ common:
   - type: Documentation
     url: https://apidocs.leadsquared.com
   - type: Pricing
-    url: https://www.leadsquared.com/pricing/
-  - type: Signup
-    url: https://www.leadsquared.com/free-trial/
+    url: https://www.leadsquared.com/marketing-automation-pricing/
+  - type: SignUp
+    url: https://www.leadsquared.com/book-demo/
+  - type: Login
+    url: https://login.leadsquared.com/
+  - type: DeveloperPortal
+    url: https://apidocs.leadsquared.com/
+  - type: APIReference
+    url: https://apidocs.leadsquared.com/overview/
+  - type: GettingStarted
+    url: https://apidocs.leadsquared.com/getting-started/
+  - type: Support
+    url: https://help.leadsquared.com/
+  - type: Blog
+    url: https://www.leadsquared.com/learn/
+  - type: Postman
+    url: https://www.postman.com/leadsquaredapi
+  - type: TermsOfService
+    url: https://www.leadsquared.com/leadsquared-terms-of-service/
+  - type: PrivacyPolicy
+    url: https://www.leadsquared.com/privacy-policy/
+  - type: Packages
+    url: packages/leadsquared-packages.yml
+  - type: SDKs
+    url: packages/leadsquared-packages.yml
+  - type: CLI
+    url: cli/leadsquared-cli.yml
+  - type: LLMsTxt
+    url: llms/leadsquared-llms.txt
+  - type: MCPServer
+    url: mcp/leadsquared-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Conventions
+    url: conventions/leadsquared-conventions.yml
+  - type: ErrorCatalog
+    url: errors/leadsquared-problem-types.yml
+  - type: RateLimits
+    url: rate-limits/leadsquared-rate-limits.yml
+  - type: Plans
+    url: plans/leadsquared-plans-pricing.yml
+  - type: DataModel
+    url: data-model/leadsquared-data-model.yml
+  - type: Webhooks
+    url: asyncapi/leadsquared-webhooks.yml
+  - type: Lifecycle
+    url: lifecycle/leadsquared-lifecycle.yml
+  - type: StatusPage
+    url: https://status.leadsquared.com/
+  - type: ChangeLog
+    url: changelog/leadsquared-changelog.yml
+  - type: Conformance
+    url: conformance/leadsquared-conformance.yml
+  - type: Compliance
+    url: https://www.leadsquared.com/security/
+  - type: TrustCenter
+    url: security/leadsquared-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/leadsquared-vulnerability-disclosure.yml
+  - type: Security
+    url: https://www.leadsquared.com/security/
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-13'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1
