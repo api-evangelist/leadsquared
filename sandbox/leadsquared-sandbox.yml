@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://apidocs.leadsquared.com/lapps/,
+  https://apidocs.leadsquared.com/getting-started/,
+  https://www.leadsquared.com/marketing-automation-pricing/
+summary: >-
+  LeadSquared has no API sandbox in the sense the rest of this catalog uses the
+  word. There is no test-mode key prefix, no separate sandbox host, no magic test
+  identifiers and no published test credentials — a developer exercises the REST API
+  against their live tenant with live accessKey/secretKey. Two narrower things do
+  exist and are recorded below: a test/live split inside the Lapps developer
+  tooling, and a paid "Sandbox" add-on sold on the pricing page.
+test_live_separation:
+  api_keys: false
+  key_prefixes: none
+  separate_host: false
+  note: >-
+    accessKey/secretKey are issued per admin user at My Account > Settings > API and
+    Webhooks and are live credentials. There is no test key and no way to tell a test
+    key from a live one, because there is only one kind.
+magic_test_values:
+  published: false
+  note: >-
+    No test lead ids, test email addresses, test phone numbers or fixture records are
+    published. Nothing to record — and nothing was invented.
+lapps_environments:
+  available: true
+  environments: [test, live]
+  description: >-
+    Lapps (serverless functions inside LeadSquared) can be published to a test
+    environment before live, and the Manage Lapps UI reports API call statistics for
+    both. The lslapp CLI targets an environment via a configured tenant profile.
+  docs: https://apidocs.leadsquared.com/lapps/
+  see: cli/leadsquared-cli.yml
+sandbox_add_on:
+  available: true
+  commercial: paid add-on
+  price: not published
+  note: >-
+    "Sandbox" is listed among the optional paid add-ons on
+    https://www.leadsquared.com/marketing-automation-pricing/ (alongside Email
+    Parser, Analytics Platform and Portals). It is sold as a separate tenant
+    environment, is quoted by sales, and is not self-serve — so it is not reachable
+    by a developer evaluating the API.
+test_clocks: false
+fixtures: false
+gaps:
+  - No self-serve sandbox tenant or free developer account (the free-trial link redirects to a demo request).
+  - No test-mode credentials, so every API experiment writes to production CRM data.
+pointer_decision:
+  emit_sandbox_type: false
+  reason: >-
+    No `type: Sandbox` pointer is wired into apis.yml from this file. The
+    console_or_sandbox check asserts that a developer can exercise the API without
+    touching production, and LeadSquared does not offer that: the Lapps test
+    environment is scoped to serverless functions, not to the REST API, and the
+    "Sandbox" add-on is a sales-quoted paid tenant. The artifact is kept as a record
+    of the absence, not as a claim of presence.

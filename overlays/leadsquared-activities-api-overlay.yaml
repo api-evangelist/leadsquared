@@ -1,0 +1,66 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for LeadSquared Activities API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    openapi/leadsquared-activities-api-openapi.yml plus
+    https://apidocs.leadsquared.com/activity-management/,
+    https://apidocs.leadsquared.com/error-handling/,
+    https://apidocs.leadsquared.com/webhooks/
+extends: openapi/leadsquared-activities-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/leadsquared/
+      x-error-envelope:
+        fields: [Status, ExceptionType, ExceptionMessage]
+        rfc9457: false
+        docs: https://apidocs.leadsquared.com/error-handling/
+      x-idempotency:
+        supported: false
+        note: >-
+          Posting an activity is not idempotent and there is no upsert equivalent —
+          a retried call creates a duplicate activity record. Guard retries client
+          side.
+      x-attribute-model:
+        style: attribute-value-list
+        note: >-
+          Activity fields are tenant-defined. Resolve ActivityEvent and its field
+          list at runtime via Get Details of Activity Type before composing a create.
+        metadata: https://apidocs.leadsquared.com/get-details-of-activity-type/
+      x-event-surface:
+        webhooks: [Lead Activity Creation, Lead Activity Update]
+        batching: >-
+          Activities occurring within one minute are grouped into a single webhook
+          POST, so handlers must accept one or many activity ids.
+        docs: https://apidocs.leadsquared.com/webhooks/
+  - target: $.components.securitySchemes
+    update:
+      AccessKeyHeaderAuth:
+        type: apiKey
+        in: header
+        name: x-LSQ-AccessKey
+        description: Access key passed as a header (recommended over the query-string form).
+      SecretKeyHeaderAuth:
+        type: apiKey
+        in: header
+        name: x-LSQ-SecretKey
+        description: Secret key passed as a header.
+  - target: $.paths['/ProspectActivity.svc/Create'].post
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: write
+        audit: required
+      x-bulk-alternative:
+        note: Use the bulk endpoint when posting more than a handful of activities; it is throttled separately.
+        url: https://apidocs.leadsquared.com/post-bulk-activities-on-leads/
+      x-async-alternative:
+        note: >-
+          The Async API accepts the same call with queueing and up to 10 retries,
+          returning a RequestId to poll — the documented way to avoid the 5-second
+          throttle on user-facing paths.
+        url: https://apidocs.leadsquared.com/post-an-activity-on-a-lead-async/

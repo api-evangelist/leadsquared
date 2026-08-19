@@ -1,0 +1,466 @@
+{
+  "item": [
+    {
+      "id": "5a697520-c51e-4589-94e5-ba0ed7e53b21",
+      "name": "Leads",
+      "description": {
+        "content": "Lead create, get, and search",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca354f4f-b387-488e-a13b-684c2b72d8d9",
+          "name": "Create a lead",
+          "request": {
+            "name": "Create a lead",
+            "description": {
+              "content": "Create a new lead in LeadSquared. At least one unique field\n(such as EmailAddress or Phone) must be provided.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "LeadManagement.svc",
+                "Lead.Create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"Attribute\": \"<string>\",\n    \"Value\": \"<string>\"\n  },\n  {\n    \"Attribute\": \"<string>\",\n    \"Value\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10cff9bc-1e53-424c-81df-25b54f63ea1a",
+              "name": "Lead created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "LeadManagement.svc",
+                    "Lead.Create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"Attribute\": \"EmailAddress\",\n    \"Value\": \"joe.pesci@example.com\"\n  },\n  {\n    \"Attribute\": \"FirstName\",\n    \"Value\": \"Joe\"\n  },\n  {\n    \"Attribute\": \"LastName\",\n    \"Value\": \"Pesci\"\n  },\n  {\n    \"Attribute\": \"Phone\",\n    \"Value\": \"8888888888\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Success\",\n  \"Message\": {\n    \"Id\": \"cc3fef18-960b-4a60-98c0-af2ab61cee80\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d01da52-531f-497a-b1b4-08c941a7e3a3",
+          "name": "Get a lead by ID",
+          "request": {
+            "name": "Get a lead by ID",
+            "description": {
+              "content": "Retrieve a single lead by its unique ProspectID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "LeadManagement.svc",
+                "Leads.GetById"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "(Required) Unique identifier of the lead"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69aa5873-6d8b-4af9-b1f6-f34ba03cc827",
+              "name": "Lead returned (array, possibly empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "LeadManagement.svc",
+                    "Leads.GetById"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ProspectID\": \"string\",\n    \"LeadType\": \"string\",\n    \"FirstName\": \"string\",\n    \"LastName\": \"string\",\n    \"EmailAddress\": \"string\",\n    \"Phone\": \"string\",\n    \"Company\": \"string\",\n    \"ProspectStage\": \"string\",\n    \"OwnerId\": \"string\",\n    \"CreatedOn\": \"string\",\n    \"ModifiedOn\": \"string\",\n    \"Score\": 9311.990109945722,\n    \"EngagementScore\": 4288.720816580364\n  },\n  {\n    \"ProspectID\": \"string\",\n    \"LeadType\": \"string\",\n    \"FirstName\": \"string\",\n    \"LastName\": \"string\",\n    \"EmailAddress\": \"string\",\n    \"Phone\": \"string\",\n    \"Company\": \"string\",\n    \"ProspectStage\": \"string\",\n    \"OwnerId\": \"string\",\n    \"CreatedOn\": \"string\",\n    \"ModifiedOn\": \"string\",\n    \"Score\": 3448.0416132605774,\n    \"EngagementScore\": 7878.667231665368\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df532488-c904-4d7c-93d8-e4c5fe197263",
+              "name": "Invalid credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "LeadManagement.svc",
+                    "Leads.GetById"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "494d3b71-12fe-4f07-b283-a1a044016feb",
+              "name": "Rate limited",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "LeadManagement.svc",
+                    "Leads.GetById"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a12a5560-d268-4877-add3-1c3677586d9d",
+          "name": "Quick search leads",
+          "request": {
+            "name": "Quick search leads",
+            "description": {
+              "content": "Search leads by FirstName, LastName, EmailAddress, Phone, Mobile,\nCompany, City, or Country. Mirrors the in-app Quick Search box.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "LeadManagement.svc",
+                "Leads.GetByQuickSearch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "key",
+                  "value": "<string>",
+                  "description": "(Required) Search value"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "76d8f932-38ae-4b1b-ad40-de97563e97d1",
+              "name": "Matching leads",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "LeadManagement.svc",
+                    "Leads.GetByQuickSearch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"ProspectID\": \"string\",\n    \"LeadType\": \"string\",\n    \"FirstName\": \"string\",\n    \"LastName\": \"string\",\n    \"EmailAddress\": \"string\",\n    \"Phone\": \"string\",\n    \"Company\": \"string\",\n    \"ProspectStage\": \"string\",\n    \"OwnerId\": \"string\",\n    \"CreatedOn\": \"string\",\n    \"ModifiedOn\": \"string\",\n    \"Score\": 9311.990109945722,\n    \"EngagementScore\": 4288.720816580364\n  },\n  {\n    \"ProspectID\": \"string\",\n    \"LeadType\": \"string\",\n    \"FirstName\": \"string\",\n    \"LastName\": \"string\",\n    \"EmailAddress\": \"string\",\n    \"Phone\": \"string\",\n    \"Company\": \"string\",\n    \"ProspectStage\": \"string\",\n    \"OwnerId\": \"string\",\n    \"CreatedOn\": \"string\",\n    \"ModifiedOn\": \"string\",\n    \"Score\": 3448.0416132605774,\n    \"EngagementScore\": 7878.667231665368\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "api.leadsquared.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "065c93b6-c4c8-432a-9a0f-5b1cfa94ce8c",
+    "name": "LeadSquared REST Activities Leads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing leads, opportunities, and activities in\nLeadSquared. Authentication uses an AccessKey and SecretKey passed\nas query parameters. The API host is region-specific; substitute\nyour tenant API host for the {host} server variable.\n\nSource documentation: https://apidocs.leadsquared.com/\n",
+      "type": "text/plain"
+    }
+  }
+}

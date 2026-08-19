@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://apidocs.leadsquared.com/api-host/, https://apidocs.leadsquared.com/news/,
+  https://status.leadsquared.com/
+versioning:
+  scheme: uri-path
+  current: v2
+  docs: https://apidocs.leadsquared.com/api-host/
+  note: >-
+    A "Sales CRM V2 APIs" set is published separately
+    (https://apidocs.leadsquared.com/leadsquared-sales-crm-v2-apis/) alongside the
+    original v2 path. No version-negotiation header, no dated versions.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  note: >-
+    NO deprecation policy is published. Searched all 381 pages in
+    apidocs.leadsquared.com/page-sitemap.xml — there is no deprecation, sunset,
+    end-of-life or migration page, and no RFC 8594 Sunset/Deprecation header is
+    documented. A consumer has no published notice period. No `Deprecation` pointer
+    is emitted for this repo as a result.
+sla:
+  url: null
+  uptime_target: null
+  note: No public SLA or uptime commitment was found on the pricing or docs pages.
+status_page:
+  url: https://status.leadsquared.com/
+  provider: Atlassian Statuspage
+  title: LeadSquared Status
+  http_status: 200
+  evidence: >-
+    Page body carries "Powered by Statuspage"/Atlassian markers and the title
+    "LeadSquared Status"; probed 2026-08-13.
+changelog:
+  url: https://apidocs.leadsquared.com/news/
+  see: changelog/leadsquared-changelog.yml
+  note: >-
+    Dated, but stale — the newest entry visible is 2022-12-21, while the platform
+    has shipped Async API, Service CRM and Portals since.
+deprecated_operations: []
+support:
+  help_center: https://help.leadsquared.com/
+  faq: https://apidocs.leadsquared.com/faq/

@@ -1,0 +1,90 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.leadsquared.com/rate-limits/
+docs: https://apidocs.leadsquared.com/rate-limits/
+limit_count: 6
+scope_model: per-account (subscription plan), with a per-user daily allowance added on top
+headers_documented: false
+headers_note: >-
+  LeadSquared documents NO rate-limit response headers — there is no
+  X-RateLimit-*, RateLimit-* or Retry-After in the documentation — and does not
+  state the HTTP status returned on exhaustion. The docs say only to "implement
+  retry logic after receiving rate limit exceptions". An agent therefore cannot
+  read remaining quota from a response; it can only fail and back off. This is the
+  single biggest runtime-semantics gap in the LeadSquared API surface.
+exhaustion_status: null
+retry_after: null
+rate_limits:
+  - id: pro-daily
+    plan: Pro
+    scope: per-account
+    window: 1 day
+    limit: 10000
+    unit: calls
+    note: Base daily allowance on the Pro plan.
+  - id: pro-per-user-daily
+    plan: Pro
+    scope: per-user
+    window: 1 day
+    limit: 1000
+    unit: calls
+    note: Additional 1,000 calls per user per day, added to the account base.
+  - id: pro-daily-cap
+    plan: Pro
+    scope: per-account
+    window: 1 day
+    limit: 250000
+    unit: calls
+    note: Hard ceiling for the Pro plan regardless of user count.
+  - id: pro-throttle-standard
+    plan: Pro
+    scope: per-account
+    window: 5 seconds
+    limit: 10
+    unit: calls
+    endpoint_class: standard
+  - id: pro-throttle-bulk
+    plan: Pro
+    scope: per-account
+    window: 5 seconds
+    limit: 5
+    unit: calls
+    endpoint_class: bulk
+  - id: super-daily
+    plan: Super
+    scope: per-account
+    window: 1 day
+    limit: 100000
+    unit: calls
+  - id: super-per-user-daily
+    plan: Super
+    scope: per-user
+    window: 1 day
+    limit: 1000
+    unit: calls
+  - id: super-daily-cap
+    plan: Super
+    scope: per-account
+    window: 1 day
+    limit: 1000000
+    unit: calls
+  - id: super-throttle-standard
+    plan: Super
+    scope: per-account
+    window: 5 seconds
+    limit: 20
+    unit: calls
+    endpoint_class: standard
+  - id: super-throttle-bulk
+    plan: Super
+    scope: per-account
+    window: 5 seconds
+    limit: 10
+    unit: calls
+    endpoint_class: bulk
+mitigations:
+  - >-
+    The Async API (https://apidocs.leadsquared.com/async-api/) is documented as the
+    way to avoid rate-limit impact on end users: it queues and retries up to 10
+    times and returns a RequestId to poll, so a web form submission is not blocked
+    by the 5-second throttle.

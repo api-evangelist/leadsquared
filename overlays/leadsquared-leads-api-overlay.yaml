@@ -1,0 +1,87 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for LeadSquared Leads API
+  version: 1.0.0
+x-provenance:
+  generated: '2026-08-13'
+  method: generated
+  source: >-
+    openapi/leadsquared-leads-api-openapi.yml plus
+    https://apidocs.leadsquared.com/api-host/,
+    https://apidocs.leadsquared.com/authentication/,
+    https://apidocs.leadsquared.com/rate-limits/,
+    https://apidocs.leadsquared.com/error-handling/
+  note: >-
+    Captures the runtime semantics API Evangelist harvested from the LeadSquared
+    documentation that the base OpenAPI does not carry. Applying this overlay does
+    not change LeadSquared's contract — the base spec was itself authored by API
+    Evangelist from the docs, and LeadSquared publishes no OpenAPI of its own.
+extends: openapi/leadsquared-leads-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-profile: https://apis.io/provider/leadsquared/
+      x-api-host-docs: https://apidocs.leadsquared.com/api-host/
+      x-regional-hosts:
+        - {region: Singapore, host: api.leadsquared.com}
+        - {region: United States, host: api-us11.leadsquared.com}
+        - {region: India (Mumbai), host: api-in21.leadsquared.com}
+        - {region: India (Hyderabad), host: api-in22.leadsquared.com}
+        - {region: Middle East, host: api-me61.leadsquared.com}
+        - {region: Ireland, host: api-ir31.leadsquared.com}
+        - {region: Canada, host: api-ca12.leadsquared.com}
+      x-error-envelope:
+        fields: [Status, ExceptionType, ExceptionMessage]
+        rfc9457: false
+        docs: https://apidocs.leadsquared.com/error-handling/
+      x-idempotency:
+        supported: false
+        note: >-
+          No idempotency key. Use Lead.CreateOrUpdate or Lead.Capture with SearchBy
+          for duplicate control.
+      x-rate-limits:
+        headers: none
+        docs: https://apidocs.leadsquared.com/rate-limits/
+        pro: {daily: 10000, cap: 250000, standard: 10 per 5s, bulk: 5 per 5s}
+        super: {daily: 100000, cap: 1000000, standard: 20 per 5s, bulk: 10 per 5s}
+      x-pagination:
+        style: page-number
+        request_objects: [Paging, Sorting, Columns]
+        params: [PageIndex, PageSize, ColumnName, Direction, Include_CSV]
+        max_page_size: 5000
+        response_fields: [RecordCount]
+  - target: $.components.securitySchemes
+    update:
+      AccessKeyHeaderAuth:
+        type: apiKey
+        in: header
+        name: x-LSQ-AccessKey
+        description: >-
+          Access key passed as a header. LeadSquared recommends the header form over
+          the query-string form. Source https://apidocs.leadsquared.com/authentication/
+      SecretKeyHeaderAuth:
+        type: apiKey
+        in: header
+        name: x-LSQ-SecretKey
+        description: >-
+          Secret key passed as a header. Keys belong to an individual admin user;
+          deactivating that user invalidates them.
+  - target: $.paths['/LeadManagement.svc/Lead.Create'].post
+    update:
+      x-agentic-access:
+        action-class: acting
+        consequence: write
+        audit: required
+      x-duplicate-control:
+        note: >-
+          Not idempotent. A retry creates a second lead unless a unique field
+          (EmailAddress or Phone) collides with an existing record. Prefer
+          Lead.CreateOrUpdate for retry-safe writes.
+        alternative: https://apidocs.leadsquared.com/create-or-update/
+  - target: $.paths['/LeadManagement.svc/Leads.GetByQuickSearch'].get
+    update:
+      x-pagination:
+        note: >-
+          Quick search returns a bounded result set. For large reads use
+          Leads.RetrieveByDateRange or Lead.Get with the Paging object.
+        alternative: https://apidocs.leadsquared.com/get-leads-by-date-range/

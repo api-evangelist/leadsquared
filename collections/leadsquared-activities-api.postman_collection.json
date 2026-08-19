@@ -1,0 +1,170 @@
+{
+  "item": [
+    {
+      "id": "5b415b89-fbd2-4691-b9ab-7e008918da02",
+      "name": "Activities",
+      "description": {
+        "content": "Activity events on leads",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "47391366-0c1b-4160-9d46-491fbcd040bb",
+          "name": "Post an activity on a lead",
+          "request": {
+            "name": "Post an activity on a lead",
+            "description": {
+              "content": "Create a custom activity event against a lead. The\nRelatedProspectId identifies the lead, ActivityEvent is the\nconfigured event code.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ProspectActivity.svc",
+                "Create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                  "type": "any",
+                  "value": "{{host}}",
+                  "key": "host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RelatedProspectId\": \"<string>\",\n  \"ActivityEvent\": \"<integer>\",\n  \"ActivityNote\": \"<string>\",\n  \"ProcessFilesAsync\": \"<boolean>\",\n  \"ActivityDateTime\": \"<string>\",\n  \"Fields\": [\n    {\n      \"SchemaName\": \"<string>\",\n      \"Value\": \"<string>\"\n    },\n    {\n      \"SchemaName\": \"<string>\",\n      \"Value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bd937ff8-e33e-45aa-be79-a656d300dba1",
+              "name": "Activity created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ProspectActivity.svc",
+                    "Create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accessKey",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+                      "type": "any",
+                      "value": "{{host}}",
+                      "key": "host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"RelatedProspectId\": \"bd595fc2-3678-4004-9ac6-65bfd1caadb5\",\n  \"ActivityEvent\": 201,\n  \"ActivityNote\": \"Your Activity Note\",\n  \"ProcessFilesAsync\": true,\n  \"ActivityDateTime\": \"2015-10-11 12:13:44\",\n  \"Fields\": [\n    {\n      \"SchemaName\": \"mx_Custom_1\",\n      \"Value\": \"value\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Status\": \"Success\",\n  \"Message\": {\n    \"Id\": \"cc3fef18-960b-4a60-98c0-af2ab61cee80\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your region-specific API host (see https://apidocs.leadsquared.com/api-host/)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "api.leadsquared.com",
+      "key": "host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{host}}/v2",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "accessKey"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "be908b82-9d87-4299-8ba7-a0bdcfeed3f0",
+    "name": "LeadSquared REST Activities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for managing leads, opportunities, and activities in\nLeadSquared. Authentication uses an AccessKey and SecretKey passed\nas query parameters. The API host is region-specific; substitute\nyour tenant API host for the {host} server variable.\n\nSource documentation: https://apidocs.leadsquared.com/\n",
+      "type": "text/plain"
+    }
+  }
+}

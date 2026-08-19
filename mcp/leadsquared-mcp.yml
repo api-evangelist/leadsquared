@@ -1,0 +1,52 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/leadsquared-leads-api-openapi.yml, openapi/leadsquared-activities-api-openapi.yml
+note: >-
+  LeadSquared publishes NO MCP server. Searched apidocs.leadsquared.com (381 pages
+  in page-sitemap.xml — no MCP page), www.leadsquared.com, the LeadSquared GitHub
+  organization (4 public repos, all 2013–2016 sample code) and the npm registry.
+  The only MCP artifact that exists is `lsq-mcp` 0.1.0 (2026-04-18), a read-only
+  community stdio server by Mohan Chhabaria — NOT shipped, endorsed or maintained
+  by LeadSquared, so it is recorded under third_party below and not as the
+  provider's deployment. The tools[] list here is a CANDIDATE derived from the
+  operationIds that genuinely exist in this repo's OpenAPI; no endpoint is implied.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: api-key
+  verified: searched
+server:
+  name: leadsquared
+  transport: null
+  url: null
+tools:
+  - name: create_lead
+    description: Create a new lead. At least one unique field (EmailAddress or Phone) is required.
+    source_operation: openapi/leadsquared-leads-api-openapi.yml#createLead
+  - name: get_lead_by_id
+    description: Retrieve a single lead by its ProspectID.
+    source_operation: openapi/leadsquared-leads-api-openapi.yml#getLeadById
+  - name: quick_search_leads
+    description: Search leads by name, email, phone or company using quick search.
+    source_operation: openapi/leadsquared-leads-api-openapi.yml#quickSearchLeads
+  - name: post_activity
+    description: Post an activity event against a lead.
+    source_operation: openapi/leadsquared-activities-api-openapi.yml#postActivity
+third_party:
+  - name: lsq-mcp
+    version: 0.1.0
+    published: '2026-04-18'
+    package: https://www.npmjs.com/package/lsq-mcp
+    repo: https://github.com/MohanChhabaria1212/lsq-mcp
+    mode: local-stdio
+    install: npm install -g lsq-mcp
+    auth: api-key
+    official: false
+    note: >-
+      Read-only MCP server exposing leads, opportunities, activities, tasks, users,
+      lists and analytics. Configured with the user's own LeadSquared accessKey /
+      secretKey via `lsq-mcp configure`. Community-maintained (personal gmail npm
+      account); recorded for discovery, NOT credited to LeadSquared.

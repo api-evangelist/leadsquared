@@ -1,0 +1,60 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of the /.well-known/ discovery surface on every LeadSquared host
+result: none
+note: >-
+  NO /.well-known/ document is served by LeadSquared on any host. Recorded as an
+  absence, not a presence: no WellKnown, APICatalog or SecurityTxt pointer is
+  emitted from this file.
+
+  Two failure shapes are worth separating. api.leadsquared.com and
+  apidocs.leadsquared.com return honest 404s. www.leadsquared.com returns HTTP 200
+  for EVERY /.well-known/* path, but the body is the 350KB WordPress homepage
+  (`<!DOCTYPE html><html lang="en-in" ...`) — a catch-all rewrite, not a document.
+  Those 200s are counted as misses. asyncapi.leadsquared.com is an AWS API Gateway
+  and answers 403 {"message":"Missing Authentication Token"} to everything unrouted.
+
+  LeadSquared DOES run a real vulnerability disclosure program with a published
+  security contact — it is just not published at /.well-known/security.txt. See
+  security/leadsquared-vulnerability-disclosure.yml.
+hosts:
+  - host: api.leadsquared.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+  - host: asyncapi.leadsquared.com
+    note: AWS API Gateway; 403 "Missing Authentication Token" on every unrouted path.
+    documents:
+      - {path: /.well-known/security.txt, status: 403, file: null}
+      - {path: /.well-known/openid-configuration, status: 403, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 403, file: null}
+      - {path: /.well-known/api-catalog, status: 403, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 403, file: null}
+      - {path: /.well-known/agent.json, status: 403, file: null}
+  - host: apidocs.leadsquared.com
+    documents:
+      - {path: /.well-known/security.txt, status: 404, file: null}
+      - {path: /.well-known/openid-configuration, status: 404, file: null}
+      - {path: /.well-known/oauth-authorization-server, status: 404, file: null}
+      - {path: /.well-known/api-catalog, status: 404, file: null}
+      - {path: /.well-known/ai-plugin.json, status: 404, file: null}
+      - {path: /.well-known/agent-card.json, status: 404, file: null}
+      - {path: /.well-known/agent.json, status: 404, file: null}
+  - host: www.leadsquared.com
+    note: >-
+      WordPress catch-all — every path below returned HTTP 200 with the site
+      homepage HTML (identical 350363-byte body), not a well-known document. All
+      treated as misses.
+    documents:
+      - {path: /.well-known/security.txt, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/openid-configuration, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/oauth-authorization-server, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/api-catalog, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/ai-plugin.json, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/agent-card.json, status: 200, file: null, body: html-shell}
+      - {path: /.well-known/agent.json, status: 200, file: null, body: html-shell}

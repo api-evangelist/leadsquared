@@ -1,0 +1,49 @@
+generated: '2026-08-13'
+method: searched
+probe: true
+url: https://www.leadsquared.com/security/
+title: LeadSquared Security
+dedicated_trust_center: false
+note: >-
+  trust.leadsquared.com does not resolve (curl exit 6, no DNS). LeadSquared's
+  compliance posture is published as a single marketing-site security page rather
+  than a trust portal, and there is no downloadable evidence pack, no subprocessor
+  list and no live control status. The certifications below are as stated on that
+  page; API Evangelist has not seen the certificates themselves.
+certifications:
+  - name: ISO 27001:2022
+    scope: >-
+      "applicable across the entire LeadSquared product, cloud services, IT
+      infrastructure, administration, finance, and internal functions"
+    certifier: British Standards Institute (BSI)
+    self_reported: true
+  - name: GDPR
+    scope: >-
+      Full compliance claimed, including a Data Processing Agreement with Standard
+      Contractual Clauses for EU data transfers.
+    self_reported: true
+inherited_certifications:
+  note: >-
+    Stated as properties of the AWS data centres LeadSquared runs on, NOT of
+    LeadSquared itself: "Our data centers are hosted in AWS are ISO 27001, SSAE-16
+    and HIPAA compliant." Recorded separately because infrastructure compliance is
+    not the same claim as product compliance.
+  items: [ISO 27001, SSAE-16, HIPAA]
+not_claimed: [SOC 2, PCI DSS, FedRAMP, CSA STAR, ISO 27017, ISO 27018]
+not_claimed_note: >-
+  No SOC 2 or PCI DSS claim appears anywhere on the page — notable for a CRM sold
+  into banking, lending, healthcare and education.
+sector_pages:
+  - {name: Healthcare security and compliance, url: 'https://www.leadsquared.com/healthcare/healthcare-security-and-compliance/'}
+legal:
+  terms_of_service: https://www.leadsquared.com/leadsquared-terms-of-service/
+  privacy_policy: https://www.leadsquared.com/privacy-policy/
+evidence:
+  - source: https://www.leadsquared.com/security/
+    http_status: 200
+    fetched: '2026-08-13'
+    keywords: [ISO 27001:2022, British Standards Institute, BSI, GDPR, HIPAA, SSAE-16]
+  - source: https://trust.leadsquared.com/
+    http_status: 0
+    fetched: '2026-08-13'
+    note: DNS/connection failure — no trust subdomain exists.

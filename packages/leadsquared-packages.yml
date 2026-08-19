@@ -1,0 +1,150 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  npm registry search + per-package metadata (registry.npmjs.org), PyPI, RubyGems,
+  NuGet (azuresearch-usnc.nuget.org), Packagist, and the LeadSquared GitHub
+  organization (api.github.com/orgs/leadsquared/repos)
+note: >-
+  LeadSquared ships NO conventional first-party REST client SDK on any package
+  registry. What it does publish is `lslapp`, the first-party CLI/scaffold for
+  building LeadSquared Apps (Lapps), maintained from @leadsquared.com accounts,
+  plus four sample-code repositories in the LeadSquared GitHub organization. The
+  most useful currency finding here is decay: the newest first-party artifact of
+  any kind is `lslapp` 1.2.2 from 2022-03-02, and the PHP client library in the
+  GitHub org has not been pushed since 2016-06-28, while the REST API itself has
+  continued to ship (Async API, Service CRM, Portals).
+registries_probed:
+  - registry: npm
+    query: leadsquared
+    result: 8 hits; 2 first-party (lslapp, lslapp-example), rest third-party
+  - registry: pypi
+    query: leadsquared
+    result: 404 — no package named leadsquared
+  - registry: rubygems
+    query: leadsquared
+    result: gem "leadsquared" 0.5.0 exists but is third-party (github.com/dpaluy/leadsquared)
+  - registry: nuget
+    query: leadsquared
+    result: 0 hits
+  - registry: packagist
+    query: leadsquared
+    result: 0 relevant hits
+  - registry: maven-central
+    query: leadsquared
+    result: not published
+packages:
+  - language: javascript
+    registry: npm
+    name: lslapp
+    url: https://www.npmjs.com/package/lslapp
+    install: npm install -g lslapp
+    official: true
+    version: 1.2.2
+    published: '2022-03-02'
+    description: >-
+      Base template and local development CLI for LeadSquared Apps (Lapps) — init,
+      run, pack, configure, save, publish. All online-platform features are mocked
+      so a Lapp can be developed offline.
+    evidence: >-
+      npm maintainers are leadsquaredlapps <Lapps@leadsquared.com>,
+      brijendra <brijendra.tiwari@leadsquared.com> and lsqdev <lsqdev@leadsquared.com>;
+      package author field is "LeadSquared". First-party.
+    note: >-
+      Documented product surface is https://www.leadsquared.com/lapps/ and
+      https://apidocs.leadsquared.com/lapps/. Last release 2022-03-02 — over four
+      years stale relative to the REST API it supports; README still pins Node 12.x.
+  - language: javascript
+    registry: npm
+    name: lslapp-example
+    url: https://www.npmjs.com/package/lslapp-example
+    install: npm install -g lslapp-example
+    official: false
+    version: 1.3.0
+    published: '2022-01-20'
+    description: Example/base template for LeadSquared Apps (Lapps).
+    note: >-
+      Package `author` claims "LeadSquared" and the README is a verbatim copy of
+      lslapp's, but the npm maintainers are personal gmail accounts
+      (lakshmi.chidhambaram@gmail.com, singhabhijeet477@gmail.com), not
+      @leadsquared.com. Recorded as NOT first-party on the maintainer evidence.
+  - language: php
+    registry: github
+    name: LeadSquared/php-library
+    url: https://github.com/LeadSquared/php-library
+    install: git clone https://github.com/LeadSquared/php-library
+    official: true
+    version: null
+    published: '2016-06-28'
+    description: PHP client library for the LeadSquared REST API.
+    note: >-
+      Never published to Packagist — there is no registry metadata endpoint to
+      query, so `version` is null. `published` is the last push date reported by
+      api.github.com/orgs/leadsquared/repos. Ten years without a push.
+  - language: php
+    registry: github
+    name: LeadSquared/lead-api-php
+    url: https://github.com/LeadSquared/lead-api-php
+    install: git clone https://github.com/LeadSquared/lead-api-php
+    official: true
+    version: null
+    published: '2013-12-26'
+    description: Sample code demonstrating usage of the LeadSquared API in PHP.
+    note: Sample code, not a packaged SDK. No registry release; version null.
+  - language: java
+    registry: github
+    name: LeadSquared/lead-api-java
+    url: https://github.com/LeadSquared/lead-api-java
+    install: git clone https://github.com/LeadSquared/lead-api-java
+    official: true
+    version: null
+    published: '2013-12-26'
+    description: Example code in Java to use the LeadSquared API.
+    note: Sample code, not a packaged SDK. Not on Maven Central; version null.
+  - language: perl
+    registry: github
+    name: LeadSquared/create-lead-perl
+    url: https://github.com/LeadSquared/create-lead-perl
+    install: git clone https://github.com/LeadSquared/create-lead-perl
+    official: true
+    version: null
+    published: '2013-12-27'
+    description: Sample code to create a lead in LeadSquared using Perl.
+    note: Sample code, not a packaged SDK. Not on CPAN; version null.
+third_party:
+  - language: javascript
+    registry: npm
+    name: leadsquared-sdk
+    url: https://www.npmjs.com/package/leadsquared-sdk
+    version: 0.0.6
+    published: '2025-07-10'
+    official: false
+    note: TypeScript SDK by Satyam Lohiya (github.com/Satyam-2001/Leadsquared). Community.
+  - language: ruby
+    registry: rubygems
+    name: leadsquared
+    url: https://rubygems.org/gems/leadsquared
+    version: 0.5.0
+    published: null
+    official: false
+    note: >-
+      Community gem, homepage github.com/dpaluy/leadsquared. Release date not read
+      from the search endpoint; recorded null rather than guessed.
+  - language: javascript
+    registry: npm
+    name: lsq-mcp
+    url: https://www.npmjs.com/package/lsq-mcp
+    version: 0.1.0
+    published: '2026-04-18'
+    official: false
+    note: >-
+      Read-only MCP server for LeadSquared CRM by Mohan Chhabaria
+      (github.com/MohanChhabaria1212/lsq-mcp). Community, not shipped by LeadSquared.
+      See mcp/leadsquared-mcp.yml.
+  - language: javascript
+    registry: npm
+    name: n8n-nodes-leadsquared
+    url: https://www.npmjs.com/package/n8n-nodes-leadsquared
+    version: 1.0.1
+    published: '2025-10-04'
+    official: false
+    note: Community n8n node wrapping Capture Lead V2.

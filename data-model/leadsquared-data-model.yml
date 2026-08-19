@@ -1,0 +1,126 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/leadsquared-leads-api-openapi.yml,
+  openapi/leadsquared-activities-api-openapi.yml,
+  https://apidocs.leadsquared.com/page-sitemap.xml (381 documented operations),
+  https://apidocs.leadsquared.com/get-leads-by-date-range/
+note: >-
+  The entity graph below is derived from the two OpenAPI files in this repo plus the
+  operation surface LeadSquared documents (lead-management, activity-management,
+  opportunity-management, task-management, user-management, account-company-
+  management, service-crm, list-management, object-types). Field-level detail is thin
+  because the harvested OpenAPI covers only 4 of ~381 documented operations; every
+  relationship recorded here is backed by a named documented operation, none is
+  inferred from naming alone.
+identifiers:
+  style: guid
+  note: >-
+    Primary keys are GUIDs (e.g. ProspectID "cc3fef18-960b-4a60-98c0-af2ab61cee80").
+    There is no Stripe-style typed id prefix, so an id alone does not tell an agent
+    what entity it belongs to. Leads additionally carry a numeric ProspectAutoId used
+    for sorting.
+attribute_model:
+  style: attribute-value-list
+  note: >-
+    Leads and activities are transported as arrays of {Attribute, Value} pairs rather
+    than as typed JSON objects — createLead takes an array of LeadAttribute, and bulk
+    reads return LeadPropertyList entries of {Attribute, Value, Fields}. Schemas are
+    tenant-defined (custom lead fields, custom activity types), so the shape must be
+    discovered at runtime via the metadata operations rather than read from a spec.
+  metadata_operations:
+    - https://apidocs.leadsquared.com/meta-data/
+    - https://apidocs.leadsquared.com/get-lead-field-properties/
+    - https://apidocs.leadsquared.com/get-details-of-activity-type/
+    - https://apidocs.leadsquared.com/get-metadata-of-an-opportunity-type/
+    - https://apidocs.leadsquared.com/get-ticket-fields/
+entities:
+  - name: Lead
+    aka: Prospect
+    id_field: ProspectID
+    secondary_id: ProspectAutoId
+    schema: openapi/leadsquared-leads-api-openapi.yml#/components/schemas/Lead
+    docs: https://apidocs.leadsquared.com/lead-management/
+  - name: Activity
+    aka: ProspectActivity
+    id_field: ActivityId
+    schema: openapi/leadsquared-activities-api-openapi.yml#/components/schemas/ActivityCreate
+    docs: https://apidocs.leadsquared.com/activity-management/
+  - name: ActivityType
+    id_field: ActivityEvent
+    docs: https://apidocs.leadsquared.com/get-list-of-activity-types/
+  - name: Opportunity
+    id_field: OpportunityId
+    docs: https://apidocs.leadsquared.com/opportunity-management/
+  - name: OpportunityType
+    docs: https://apidocs.leadsquared.com/get-opportunity-types/
+  - name: Task
+    id_field: UserTaskId
+    subtypes: [Appointment, To-Do]
+    docs: https://apidocs.leadsquared.com/task-management/
+  - name: Account
+    aka: Company
+    id_field: ProspectCompanyId
+    docs: https://apidocs.leadsquared.com/account-company-management/
+  - name: AccountActivity
+    docs: https://apidocs.leadsquared.com/account-activity-management/
+  - name: User
+    id_field: UserId
+    docs: https://apidocs.leadsquared.com/user-management/
+  - name: PermissionTemplate
+    docs: https://apidocs.leadsquared.com/create-permission-templates/
+  - name: SalesGroup
+    docs: https://apidocs.leadsquared.com/sales-group-management/
+  - name: Team
+    docs: https://apidocs.leadsquared.com/team-management/
+  - name: Ticket
+    id_field: TicketId
+    docs: https://apidocs.leadsquared.com/service-crm/
+  - name: Product
+    docs: https://apidocs.leadsquared.com/retrieve-list-of-products/
+  - name: List
+    aka: Static List
+    docs: https://apidocs.leadsquared.com/list-management/
+  - name: Note
+    docs: https://apidocs.leadsquared.com/get-all-notes-of-lead/
+  - name: Webhook
+    docs: https://apidocs.leadsquared.com/webhook-apis/
+  - name: EmailTemplate
+    docs: https://apidocs.leadsquared.com/create-email-template/
+  - name: EmailCampaign
+    docs: https://apidocs.leadsquared.com/send-email-campaign/
+  - name: LandingPage
+    docs: https://apidocs.leadsquared.com/landing-pages/
+  - name: Lapp
+    docs: https://apidocs.leadsquared.com/lapps/
+  - name: MavisTable
+    docs: https://apidocs.leadsquared.com/mavis-database/
+  - name: ObjectTypeAssociation
+    docs: https://apidocs.leadsquared.com/object-types/
+relationships:
+  - {from: Lead, to: Activity, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/get-activities-of-a-lead/'}
+  - {from: Activity, to: ActivityType, type: belongs_to, via: ActivityEvent, evidence: 'https://apidocs.leadsquared.com/get-details-of-activity-type/'}
+  - {from: Lead, to: Opportunity, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/get-opportunities-by-lead-id/'}
+  - {from: Opportunity, to: OpportunityType, type: belongs_to, via: OpportunityTypeId, evidence: 'https://apidocs.leadsquared.com/get-metadata-of-an-opportunity-type/'}
+  - {from: Opportunity, to: Activity, type: has_many, via: OpportunityId, evidence: 'https://apidocs.leadsquared.com/get-activities-of-an-opportunity/'}
+  - {from: Lead, to: Task, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/retrieve-tasks-by-leadid/'}
+  - {from: Opportunity, to: Task, type: has_many, via: OpportunityId, evidence: 'https://apidocs.leadsquared.com/retrieve-tasks-by-opportunity-id/'}
+  - {from: Lead, to: User, type: belongs_to, via: OwnerId, evidence: 'https://apidocs.leadsquared.com/get-details-of-a-lead-owner/'}
+  - {from: Activity, to: User, type: belongs_to, via: ActivityOwner, evidence: 'https://apidocs.leadsquared.com/get-activity-owner-details/'}
+  - {from: Account, to: AccountActivity, type: has_many, via: ProspectCompanyId, evidence: 'https://apidocs.leadsquared.com/retrieve-account-activities-by-account-id/'}
+  - {from: Account, to: Lead, type: has_many, via: RelatedCompanyId, evidence: 'https://apidocs.leadsquared.com/account-company-management/'}
+  - {from: List, to: Lead, type: has_many, via: ListId, evidence: 'https://apidocs.leadsquared.com/get-leads-in-a-list/'}
+  - {from: Lead, to: List, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/get-list-by-lead-id/'}
+  - {from: Lead, to: Note, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/get-all-notes-of-lead/'}
+  - {from: Lead, to: Ticket, type: has_many, via: ProspectID, evidence: 'https://apidocs.leadsquared.com/service-crm/'}
+  - {from: User, to: SalesGroup, type: has_many, via: SalesGroupId, evidence: 'https://apidocs.leadsquared.com/get-users-of-a-sales-group/'}
+  - {from: User, to: Team, type: belongs_to, via: TeamId, evidence: 'https://apidocs.leadsquared.com/team-management/'}
+  - {from: User, to: PermissionTemplate, type: belongs_to, via: TemplateId, evidence: 'https://apidocs.leadsquared.com/apply-permission-templates/'}
+  - {from: Lead, to: Lead, type: has_many, via: MergedChildLeads, evidence: 'https://apidocs.leadsquared.com/get-info-on-merged-child-leads/'}
+  - {from: Opportunity, to: Product, type: has_many, via: ProductId, evidence: 'https://apidocs.leadsquared.com/retrieve-list-of-products/'}
+custom_associations:
+  supported: true
+  note: >-
+    Tenants can define their own object-type associations (link/unlink between object
+    types, singly or in bulk), so the deployed graph is a superset of the one above.
+  docs: https://apidocs.leadsquared.com/object-types/

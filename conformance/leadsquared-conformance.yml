@@ -1,0 +1,102 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/leadsquared-leads-api-openapi.yml,
+  openapi/leadsquared-activities-api-openapi.yml,
+  https://apidocs.leadsquared.com/authentication/,
+  https://apidocs.leadsquared.com/error-handling/,
+  https://www.leadsquared.com/security/
+note: >-
+  Cross-cutting standards posture. LeadSquared's API is a plain key-authenticated
+  JSON-over-HTTPS surface with no adopted API standard beyond HTTPS itself: no
+  OAuth, no OIDC, no RFC 9457, no RFC 9116, no RFC 8594, no OpenAPI of its own. The
+  organisational compliance claims (ISO 27001:2022, GDPR) are real and published;
+  they are recorded here and in security/leadsquared-trust-center.yml.
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No oauth2 securityScheme in any spec; the authentication docs describe only an
+      accessKey/secretKey pair and mention no OAuth, token endpoint or refresh flow.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on api.leadsquared.com.
+  - id: api-key-auth
+    conforms: true
+    evidence: >-
+      accessKey + secretKey, accepted in the query string or as x-LSQ-AccessKey /
+      x-LSQ-SecretKey headers (headers recommended by the docs).
+  - id: tls-required
+    conforms: true
+    evidence: >-
+      "All API requests must be made over HTTPS. Calls made using plain HTTP will
+      fail." TLS 1.3 observed on api.leadsquared.com.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors use a proprietary {Status, ExceptionType, ExceptionMessage} envelope
+      with content-type application/json, not application/problem+json.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: No /.well-known/security.txt on any host (see well-known/).
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No deprecation policy and no Sunset/Deprecation header documented.
+  - id: rfc9110-idempotency
+    conforms: false
+    evidence: >-
+      No idempotency key of any kind. Duplicate control is upsert-based
+      (Lead.CreateOrUpdate / SearchBy), not request-key based.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      LeadSquared publishes no OpenAPI/Swagger document. Probed /openapi.json,
+      /swagger.json, /v2/openapi.json and /api-docs on api.leadsquared.com and
+      apidocs.leadsquared.com — all 404. The OpenAPI in this repo was authored by
+      API Evangelist from the documentation.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      No AsyncAPI document. The "Async API" product is a queued REST surface, not an
+      AsyncAPI contract.
+  - id: graphql
+    conforms: false
+    evidence: No GraphQL endpoint documented or discoverable.
+  - id: webhooks
+    conforms: true
+    evidence: 35 documented webhook event types with a management API; see asyncapi/leadsquared-webhooks.yml.
+  - id: webhook-signature-verification
+    conforms: false
+    evidence: >-
+      No HMAC or shared-secret signature is documented; authenticity relies on
+      customer-configured custom headers.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Consistent Paging {PageIndex, PageSize} + Sorting {ColumnName, Direction} +
+      Columns {Include_CSV} request objects with a RecordCount response field.
+  - id: rate-limit-headers
+    conforms: false
+    evidence: No RateLimit-*, X-RateLimit-* or Retry-After headers documented.
+  - id: iso-27001
+    conforms: true
+    evidence: >-
+      ISO 27001:2022 certified by the British Standards Institute (BSI), scope stated
+      as the entire product, cloud services and IT infrastructure
+      (https://www.leadsquared.com/security/). Provider-stated; certificate not seen.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      GDPR compliance claimed with a DPA incorporating Standard Contractual Clauses;
+      privacy contact privacy@leadsquared.com.
+  - id: hipaa
+    conforms: partial
+    evidence: >-
+      Claimed of the underlying AWS data centres, not of the LeadSquared product
+      itself. Recorded as partial rather than true.
+  - id: soc2
+    conforms: false
+    evidence: No SOC 2 claim appears on the published security page.
+  - id: pci-dss
+    conforms: false
+    evidence: No PCI DSS claim appears on the published security page.

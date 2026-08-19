@@ -1,21 +1,81 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/leadsquared-openapi.yml
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.leadsquared.com/authentication/
+docs: https://apidocs.leadsquared.com/authentication/
+derived_baseline: openapi/leadsquared-leads-api-openapi.yml, openapi/leadsquared-activities-api-openapi.yml
+note: >-
+  SEARCHED upgrade over the derived baseline. The OpenAPI in this repo declares only
+  the query-string form of the key pair; the documentation additionally publishes the
+  header form (x-LSQ-AccessKey / x-LSQ-SecretKey) and recommends it, and names the
+  operational constraints on the keys. No OAuth 2.0, no OpenID Connect, no bearer
+  tokens, no scopes, no refresh — so no scopes/ artifact is emitted for this provider.
 summary:
-  types:
-  - apiKey
-  api_key_in:
-  - query
+  types: [apiKey]
+  api_key_in: [query, header]
+  oauth2_flows: []
+  oidc: false
+  mutual_tls: false
+  https_required: true
 schemes:
-- name: AccessKeyAuth
-  type: apiKey
-  in: query
-  parameter: accessKey
-  sources:
-  - openapi/leadsquared-openapi.yml
-- name: SecretKeyAuth
-  type: apiKey
-  in: query
-  parameter: secretKey
-  sources:
-  - openapi/leadsquared-openapi.yml
+  - name: AccessKeyAuth
+    type: apiKey
+    in: query
+    parameter: accessKey
+    sources: [openapi/leadsquared-leads-api-openapi.yml, openapi/leadsquared-activities-api-openapi.yml]
+  - name: SecretKeyAuth
+    type: apiKey
+    in: query
+    parameter: secretKey
+    sources: [openapi/leadsquared-leads-api-openapi.yml, openapi/leadsquared-activities-api-openapi.yml]
+  - name: AccessKeyHeaderAuth
+    type: apiKey
+    in: header
+    parameter: x-LSQ-AccessKey
+    recommended: true
+    sources: [https://apidocs.leadsquared.com/authentication/]
+  - name: SecretKeyHeaderAuth
+    type: apiKey
+    in: header
+    parameter: x-LSQ-SecretKey
+    recommended: true
+    sources: [https://apidocs.leadsquared.com/authentication/]
+  - name: AsyncApiKey
+    type: apiKey
+    in: header
+    parameter: x-api-key
+    scope: Async API only (asyncapi.leadsquared.com)
+    sources: [https://apidocs.leadsquared.com/async-api/]
+    note: >-
+      Async submissions require x-api-key in addition to the accessKey/secretKey pair;
+      the async Status API requires only x-api-key.
+key_management:
+  issued_at: My Account > Settings > API and Webhooks
+  binding: individual admin user
+  rotation_policy: not published
+  expiry: none documented
+  constraints:
+    - Keys should belong to an active Admin user account.
+    - >-
+      Deactivating the user deactivates their API keys, which fails every integration
+      bound to them. This is the most common non-obvious 401 cause after the wrong
+      regional host.
+transport:
+  https_only: true
+  quote: >-
+    "All API requests must be made over HTTPS. Calls made using plain HTTP will fail."
+  query_string_warning: >-
+    LeadSquared accepts credentials in the query string. That places long-lived secrets
+    into URLs, proxy logs and browser history; the header form should be used instead.
+host_binding:
+  regional: true
+  note: >-
+    Authentication is host-bound — a valid key pair sent to the wrong regional host
+    returns 401 with the correct host named in the error message. See
+    conventions/leadsquared-conventions.yml.
+  docs: https://apidocs.leadsquared.com/api-host/
+portal_authentication:
+  note: >-
+    A separate authentication surface exists for LeadSquared Portals (self-service end
+    users): register, sign-in, OTP sign-in, password reset, auto-login tenant and
+    lead-level auth keys. It is end-user authentication, not API-client authentication.
+  docs: https://apidocs.leadsquared.com/portal-api/

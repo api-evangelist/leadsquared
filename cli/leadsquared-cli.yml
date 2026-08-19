@@ -1,0 +1,59 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://www.npmjs.com/package/lslapp (registry.npmjs.org/lslapp README),
+  https://apidocs.leadsquared.com/lapps/
+name: lslapp
+description: >-
+  First-party CLI for LeadSquared Apps (Lapps) — the serverless Node.js functions
+  that run inside LeadSquared and expose their own REST URL. It scaffolds a Lapp,
+  runs it locally against a mocked platform, packages it, and uploads/publishes it
+  to a tenant. It is NOT a client for the LeadSquared REST API: there is no CLI for
+  leads, activities or opportunities.
+official: true
+official_evidence: >-
+  npm maintainers Lapps@leadsquared.com, brijendra.tiwari@leadsquared.com and
+  lsqdev@leadsquared.com; package author "LeadSquared".
+version: 1.2.2
+published: '2022-03-02'
+currency_note: >-
+  Last published 2022-03-02; the README still pins Node 12.x ("this package runs
+  locally on node version > 12.x ... deployment is done on the same version") while
+  the Lapps runtime documentation now states Node.js 16.x. The tooling has drifted
+  from the platform it targets.
+install:
+  - method: npm
+    command: npm install -g lslapp
+    note: >-
+      Must be installed globally. The README warns Linux users not to install with
+      sudo and to run `sudo chown -R $(whoami) ~/.npm` instead.
+commands:
+  - name: lslapp
+    description: Run with no arguments to be prompted with all available commands.
+  - name: lslapp init
+    description: Scaffold a new Lapp; prompts for the Lapp name and generates a template with main.js.
+  - name: lslapp run
+    description: Execute the Lapp locally and return a response, against mocked platform features.
+  - name: lslapp pack
+    description: Build a deployable zip into the `deliverables` folder.
+  - name: lslapp configure
+    description: >-
+      Create a named tenant profile. Prompts for profile name, OrgCode, Region
+      (1 = SGP, 11 = US, 21 = Mumbai, 31 = Ireland) and a Token generated from the
+      LeadSquared Lapps admin portal.
+  - name: lslapp save
+    description: >-
+      Create or update the Lapp and upload its code. Takes -orgcode/-o, -region/-r and
+      -token/-t, or -profile/-p for a configured profile. Creates the Lapp when no Lapp
+      Id exists in config.json, otherwise updates it.
+  - name: lslapp publish
+    description: Publish saved code to a tenant environment (test or live), using the same profile flags.
+flows:
+  - name: Build and ship a Lapp
+    steps: [lslapp init, edit main.js, lslapp run, lslapp pack, lslapp configure, lslapp save, lslapp publish]
+environments: [test, live]
+environments_note: >-
+  Lapps are published to a test or live environment and API call statistics are
+  reported per environment — this is LeadSquared's only developer-facing test/live
+  separation. See sandbox/leadsquared-sandbox.yml.
+package: packages/leadsquared-packages.yml

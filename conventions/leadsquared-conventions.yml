@@ -1,0 +1,134 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://apidocs.leadsquared.com/authentication/,
+  https://apidocs.leadsquared.com/api-host/,
+  https://apidocs.leadsquared.com/error-handling/,
+  https://apidocs.leadsquared.com/rate-limits/,
+  https://apidocs.leadsquared.com/get-leads-by-date-range/,
+  https://apidocs.leadsquared.com/async-api/
+authentication:
+  style: api-key-pair
+  parameters: [accessKey, secretKey]
+  transports:
+    - {in: query, params: [accessKey, secretKey]}
+    - {in: header, params: [x-LSQ-AccessKey, x-LSQ-SecretKey], recommended: true}
+  oauth2: false
+  https_required: true
+  key_binding: >-
+    Keys belong to an individual admin user, not to the account. Deactivating that
+    user invalidates the keys — a real operational hazard for integrations bound to
+    a departing employee's credentials.
+  docs: https://apidocs.leadsquared.com/authentication/
+  see: authentication/leadsquared-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v2
+  header: null
+  date_versioning: false
+  note: Every host is `https://<regional-host>/v2/`. No version negotiation header.
+  docs: https://apidocs.leadsquared.com/api-host/
+regionalisation:
+  required: true
+  note: >-
+    The base host is tenant-specific and must be discovered, not assumed. Calling
+    the wrong regional host returns 401 with the correct host named in the error
+    message. Hosts are found in-app at My Account > Settings > API and Webhooks, or
+    programmatically via the User Authentication API.
+  hosts:
+    - {region: Singapore, host: api.leadsquared.com}
+    - {region: United States, host: api-us11.leadsquared.com}
+    - {region: India (Mumbai), host: api-in21.leadsquared.com}
+    - {region: India (Hyderabad), host: api-in22.leadsquared.com}
+    - {region: Middle East, host: api-me61.leadsquared.com}
+    - {region: Ireland, host: api-ir31.leadsquared.com}
+    - {region: Canada, host: api-ca12.leadsquared.com}
+  docs: https://apidocs.leadsquared.com/api-host/
+idempotency:
+  supported: false
+  header: null
+  note: >-
+    LeadSquared documents NO idempotency key. There is no Idempotency-Key header or
+    equivalent request parameter anywhere in the 381-page API documentation. The
+    only duplicate-prevention mechanism is upsert semantics — Lead.CreateOrUpdate,
+    Lead.Capture with a SearchBy field, and the bulk create-or-update variants —
+    which dedupe on a unique lead field rather than on a client-supplied request
+    key. A retried POST /ProspectActivity.svc/Create will create a second activity.
+  upsert_operations:
+    - https://apidocs.leadsquared.com/create-or-update/
+    - https://apidocs.leadsquared.com/bulk-create-or-update/
+    - https://apidocs.leadsquared.com/capture-lead/
+pagination:
+  style: page-number
+  request_object: Paging
+  params:
+    - {name: PageIndex, description: 1-based page number}
+    - {name: PageSize, description: Records per page, maximum 5000}
+  sorting:
+    request_object: Sorting
+    params:
+      - {name: ColumnName, description: Field to sort by, e.g. ProspectAutoId}
+      - {name: Direction, description: '"1" newest first, "0" oldest first'}
+  field_selection:
+    request_object: Columns
+    params:
+      - {name: Include_CSV, description: Comma-separated list of fields to return}
+  response_fields: [RecordCount]
+  cursor: false
+  link_header: false
+  docs: https://apidocs.leadsquared.com/get-leads-by-date-range/
+  note: >-
+    Paging/Sorting/Columns are POST body objects, not query parameters, so an agent
+    cannot page a LeadSquared bulk retrieve by rewriting a URL.
+error_envelope:
+  format: proprietary
+  rfc9457: false
+  content_type: application/json
+  fields:
+    - {name: Status, description: '"Error" on failure, "Success" on success'}
+    - {name: ExceptionType, description: 'Symbolic exception class, e.g. MXMandatoryAttributeMissingException'}
+    - {name: ExceptionMessage, description: Human-readable description of the failure}
+  status_codes: [200, 400, 401, 404, 500]
+  docs: https://apidocs.leadsquared.com/error-handling/
+  see: errors/leadsquared-problem-types.yml
+rate_limit_signaling:
+  headers: none
+  retry_after: false
+  exhaustion_status: undocumented
+  note: >-
+    Limits are published per plan but nothing is signalled at runtime. See
+    rate-limits/leadsquared-rate-limits.yml.
+request_tracing:
+  request_id_header: null
+  async_request_id: RequestId
+  note: >-
+    The synchronous REST API returns no correlation identifier. Only the Async API
+    issues a RequestId, which is then used to poll the matching status endpoint.
+    Async calls additionally require an `x-api-key` header alongside the key pair.
+  docs: https://apidocs.leadsquared.com/async-api/
+bulk_and_async:
+  bulk_endpoints: true
+  bulk_note: >-
+    Bulk variants exist across leads, activities, opportunities, tasks and users
+    and are throttled separately (5 or 10 calls per 5 seconds by plan).
+  async_api:
+    base: https://asyncapi.leadsquared.com/
+    pattern: submit -> RequestId -> status endpoint -> metrics endpoint
+    retries: up to 10
+    operations:
+      - Capture Leads
+      - Update a Lead
+      - Post an Activity on a Lead
+      - Create a Lead and Activity
+      - Capture Opportunities
+      - Update an Opportunity
+      - Post a Call Log
+event_surface:
+  webhooks: true
+  see: asyncapi/leadsquared-webhooks.yml
+cross_links:
+  authentication: authentication/leadsquared-authentication.yml
+  errors: errors/leadsquared-problem-types.yml
+  lifecycle: lifecycle/leadsquared-lifecycle.yml
+  rate_limits: rate-limits/leadsquared-rate-limits.yml
+  webhooks: asyncapi/leadsquared-webhooks.yml

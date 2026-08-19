@@ -1,0 +1,105 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.leadsquared.com/sales-crm-pricing/, https://www.leadsquared.com/marketing-automation-pricing/
+plan_count: 4
+currency: USD
+note: >-
+  LeadSquared publishes list prices for two product lines. Sales CRM is priced per
+  user per month billed annually; Marketing Automation is priced per account billed
+  annually. Neither pricing page states an API call allowance — the API quota
+  attaches to the Pro/Super tier names and is published separately at
+  https://apidocs.leadsquared.com/rate-limits/, which is why the two artifacts must
+  be read together. Service CRM, Field Sales and the industry editions are quoted
+  by sales and are not listed here.
+plans:
+  - name: Sales Pro
+    product: Sales CRM
+    price: 60
+    currency: USD
+    period: per user per month
+    billing: annual
+    url: https://www.leadsquared.com/sales-crm-pricing/
+    limits:
+      contacts: unlimited
+      storage: 2GB + 20MB per user
+      email_inclusions: 50000
+      permission_templates: 7
+      mavis_db: 200 MB
+      webhooks: 3
+      converse_chatbot_sessions: 500
+      document_designer: 1000
+      byor_reports: 2 per user
+    api:
+      daily_calls: 10000
+      daily_calls_per_user_addition: 1000
+      daily_cap: 250000
+      throttle_standard: 10 calls / 5 seconds
+      throttle_bulk: 5 calls / 5 seconds
+      source: https://apidocs.leadsquared.com/rate-limits/
+  - name: Sales Super
+    product: Sales CRM
+    price: 100
+    currency: USD
+    period: per user per month
+    billing: annual
+    url: https://www.leadsquared.com/sales-crm-pricing/
+    limits:
+      contacts: unlimited
+      storage: 10GB + 20MB per user
+      email_inclusions: 100000
+      permission_templates: unlimited
+      mavis_db: 1 GB
+      webhooks: 30
+      converse_chatbot_sessions: 2000
+      document_designer: 2000
+      byor_reports: 5 per user
+    api:
+      daily_calls: 100000
+      daily_calls_per_user_addition: 1000
+      daily_cap: 1000000
+      throttle_standard: 20 calls / 5 seconds
+      throttle_bulk: 10 calls / 5 seconds
+      source: https://apidocs.leadsquared.com/rate-limits/
+  - name: Marketing Pro
+    product: Marketing Automation
+    price: 2000
+    currency: USD
+    period: per account per year
+    billing: annual
+    url: https://www.leadsquared.com/marketing-automation-pricing/
+    limits:
+      contacts: unlimited
+      users_included: 2
+      emails_per_month: 100000
+      converse_chatbot_sessions: 1000
+      storage: 2GB + 20MB per user
+      byor_reports: 25
+      automation: basic workflow automation types
+  - name: Marketing Super
+    product: Marketing Automation
+    price: 3500
+    currency: USD
+    period: per account per year
+    billing: annual
+    url: https://www.leadsquared.com/marketing-automation-pricing/
+    limits:
+      contacts: unlimited
+      users_included: 2
+      emails_per_month: 250000
+      converse_chatbot_sessions: 2000
+      storage: 10GB + 20MB per user
+      byor_reports: 50
+      automation: basic + advanced automation types
+add_ons:
+  - name: Sandbox
+    note: Listed as an optional paid add-on on the Marketing Automation pricing page; price not published.
+  - name: Email Parser
+  - name: Analytics Platform
+  - name: Portals
+free_tier: false
+trial:
+  available: false
+  note: >-
+    https://www.leadsquared.com/free-trial/ redirects (HTTP 200 after redirect) to
+    https://www.leadsquared.com/book-demo/ — there is no self-serve free trial;
+    the entry point is a sales demo request.

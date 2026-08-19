@@ -1,0 +1,65 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.leadsquared.com/error-handling/
+derived_from:
+  - openapi/leadsquared-leads-api-openapi.yml
+format: proprietary
+rfc9457: false
+content_type: application/json
+envelope:
+  Status: Error
+  ExceptionType: <symbolic exception class>
+  ExceptionMessage: <human-readable description>
+note: >-
+  LeadSquared does not use RFC 9457 problem+json. Failures return HTTP status plus
+  a three-field JSON envelope. The machine-actionable part is `ExceptionType` — a
+  .NET-style exception class name prefixed `MX` — but LeadSquared publishes NO
+  enumerated registry of those exception types; the documentation shows exactly one
+  by example. An agent can branch on the HTTP status and on the presence of
+  `Status == "Error"`, but cannot enumerate or pre-handle the exception space.
+statuses:
+  - status: 200
+    title: Success
+    description: This is the status code for successful API call.
+  - status: 400
+    title: Bad request
+    description: The message body on the request is not as per API specification.
+    remediation: >-
+      Verify the content type is application/json, that the JSON structure is valid,
+      and that attribute names match the lead/activity schema.
+  - status: 401
+    title: Unauthorized
+    description: The API call was made with invalid access credentials.
+    remediation: >-
+      Check accessKey and secretKey. Also check the regional API host — calling the
+      wrong host returns 401, and the correct host is named in the error message.
+      Keys tied to a deactivated user are also inactive.
+    source_operation: openapi/leadsquared-leads-api-openapi.yml#getLeadById
+  - status: 404
+    title: Not found
+    description: The API could not be found. Please check the API signature (syntax).
+    remediation: Verify the service path and operation name in the URL.
+  - status: 429
+    title: Too many requests
+    description: >-
+      Present as a documented response on getLeadById in this repo's OpenAPI. The
+      LeadSquared rate-limit documentation does not itself name a status code or any
+      Retry-After header, so treat the code as indicative and back off on any
+      throttle exception.
+    source_operation: openapi/leadsquared-leads-api-openapi.yml#getLeadById
+    confidence: low
+  - status: 500
+    title: Server error
+    description: The API called failed. There could be many reasons for it.
+    remediation: Inspect ExceptionMessage for detail; log the call, status and message.
+exception_types:
+  - name: MXMandatoryAttributeMissingException
+    status: 400
+    example_message: "'leadId' is mandatory for updating lead"
+    source: https://apidocs.leadsquared.com/error-handling/
+    note: The only exception type LeadSquared publishes by name.
+gaps:
+  - >-
+    No enumerated error-code / exception-type registry is published. This is the
+    highest-value error-semantics improvement LeadSquared could make for agents.
+  - No error `type` URIs, no `instance`, no correlation id on synchronous failures.

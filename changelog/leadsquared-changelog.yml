@@ -1,0 +1,33 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.leadsquared.com/news/
+url: https://apidocs.leadsquared.com/news/
+scheme: dated-posts
+current_version: v2
+dated: true
+entry_count: 2
+note: >-
+  LeadSquared maintains a dated API changelog at apidocs.leadsquared.com/news/, but
+  it is effectively abandoned: the most recent entries visible are both dated
+  2022-12-21, nearly four years before this capture, even though the API has since
+  gained the Async API, Service CRM/tickets and Portal surfaces. The page has a
+  "Load More" control, so older entries exist below these; the recent window is what
+  is captured here per the pipeline contract. Product-level release notes live
+  separately on help.leadsquared.com, not in the API changelog.
+entries:
+  - date: '2022-12-21'
+    title: Custom fields in lead update webhook post data
+    type: addition
+    breaking: false
+    highlight: >-
+      "We now support custom fields (e.g., for unique Ids required for integrations)
+      in the post data of the lead update webhook." Enabled by an account manager or
+      support.
+  - date: '2022-12-21'
+    title: Remove all leads from a Static List
+    type: addition
+    breaking: false
+    highlight: >-
+      "We've released a new API that enables you to remove all the users present in a
+      Static List."
+    operation: https://apidocs.leadsquared.com/remove-all-leads-from-a-static-list/

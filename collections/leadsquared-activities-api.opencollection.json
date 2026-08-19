@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "LeadSquared REST Activities API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "accessKey",
+      "value": "{{accessKey}}",
+      "placement": "query"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Activities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Post an activity on a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{host}/v2/ProspectActivity.svc/Create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a custom activity event against a lead. The\nRelatedProspectId identifies the lead, ActivityEvent is the\nconfigured event code.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

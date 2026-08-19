@@ -1,0 +1,90 @@
+generated: '2026-08-13'
+method: searched
+source: https://apidocs.leadsquared.com/webhooks/
+spec_type: none
+asyncapi: false
+asyncapi_note: >-
+  LeadSquared publishes NO AsyncAPI document. Do not confuse the LeadSquared
+  "Async API" (https://apidocs.leadsquared.com/async-api/) with the AsyncAPI
+  specification — the former is a queued, retrying REST surface on
+  asyncapi.leadsquared.com that returns a RequestId to poll, not an event-driven
+  contract. The real event surface is webhooks, catalogued below.
+docs:
+  webhooks: https://apidocs.leadsquared.com/webhooks/
+  best_practices: https://apidocs.leadsquared.com/webhook-best-practices/
+  management_api: https://apidocs.leadsquared.com/webhook-apis/
+transport:
+  method: POST
+  content_types:
+    - application/json
+    - application/x-www-form-urlencoded
+    - text/plain
+  default_content_type: application/json
+  query_parameters:
+    - name: entityType
+      description: webhook | rule | automation — what configured the delivery.
+    - name: entityId
+      description: Identifier of the triggering entity.
+    - name: eventType
+      description: Action descriptor, e.g. "SalesActivity_Post_Update".
+  custom_headers: supported
+  signing: none
+  signing_note: >-
+    No HMAC signature or shared-secret verification is documented. Authenticity is
+    left to customer-configured custom headers, which is a weaker guarantee than a
+    signed payload — a consumer cannot verify the payload was not tampered with.
+  retries:
+    attempts: 3
+    note: Failed executions retry up to 3 attempts before being marked failed.
+  statuses: [Success (HTTP 200), Failure (non-200), In Queue]
+  batching: >-
+    Activity data for activities that happened within one minute is grouped and
+    posted together, so a handler must accept either a single or multiple activity
+    ids per request.
+plan_limits:
+  Sales Pro: 3 webhooks
+  Sales Super: 30 webhooks
+  source: https://www.leadsquared.com/sales-crm-pricing/
+event_count: 35
+events:
+  - {name: Account Activity Create, entity: Account}
+  - {name: Account Activity Update, entity: Account}
+  - {name: Account Create, entity: Account}
+  - {name: Account Delete, entity: Account}
+  - {name: Account Update, entity: Account}
+  - {name: Landing Page Submission, entity: LandingPage}
+  - {name: Lead Activity Creation, entity: Activity}
+  - {name: Lead Activity Update, entity: Activity}
+  - {name: Lead Creation, entity: Lead}
+  - {name: Lead Delete, entity: Lead}
+  - {name: Lead Field Value Change, entity: Lead}
+  - {name: Lead Merge, entity: Lead}
+  - {name: Lead Ownership Change, entity: Lead}
+  - {name: Lead Score Change, entity: Lead}
+  - {name: Lead Stage Change, entity: Lead}
+  - {name: Lead Update, entity: Lead}
+  - {name: Leave Create, entity: Leave}
+  - {name: Leave Delete, entity: Leave}
+  - {name: Leave Update, entity: Leave}
+  - {name: Opportunity Create, entity: Opportunity}
+  - {name: Opportunity Delete, entity: Opportunity}
+  - {name: Opportunity Field Value Change, entity: Opportunity}
+  - {name: Opportunity Stage/Status Change, entity: Opportunity}
+  - {name: Opportunity Update, entity: Opportunity}
+  - {name: Product Create, entity: Product}
+  - {name: Product Delete, entity: Product}
+  - {name: Product Update, entity: Product}
+  - {name: Task Cancel, entity: Task}
+  - {name: Task Complete, entity: Task}
+  - {name: Task Create, entity: Task}
+  - {name: Task Reminder, entity: Task}
+  - {name: Task Update, entity: Task}
+  - {name: User Activate/Deactivate, entity: User}
+  - {name: User Availability Status Change, entity: User}
+  - {name: User Create, entity: User}
+  - {name: User Update, entity: User}
+management_operations:
+  - {name: Create a Webhook, url: https://apidocs.leadsquared.com/create-a-webhook/}
+  - {name: Retrieve a Webhook, url: https://apidocs.leadsquared.com/retrieve-a-webhook/}
+  - {name: Update a Webhook, url: https://apidocs.leadsquared.com/update-a-webhook/}
+  - {name: Delete a Webhook, url: https://apidocs.leadsquared.com/delete-a-webhook/}
