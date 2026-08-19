@@ -43,7 +43,7 @@ url: >-
   https://raw.githubusercontent.com/api-evangelist/leadsquared/refs/heads/main/apis.yml
 created: '2026-05-11'
 modified: '2026-08-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: leadsquared:rest-api
   name: LeadSquared REST API
