@@ -1,0 +1,14 @@
+{
+  "repo": "leadsquared",
+  "feeds": [
+    {
+      "source": "https://help.leadsquared.com/",
+      "feed_url": "https://help.leadsquared.com/feed/",
+      "title": "",
+      "saved": 1,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 1,
+  "fetched": "2026-08-22T20:20:02Z"
+}
