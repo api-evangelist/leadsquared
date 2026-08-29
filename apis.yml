@@ -9,6 +9,18 @@ description: >-
   access to core platform resources like leads, opportunities, activities,
   tasks, and users using API key authentication.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: published
   onboarding: sales-gated
