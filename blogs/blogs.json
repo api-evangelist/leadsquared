@@ -2,13 +2,20 @@
   "repo": "leadsquared",
   "feeds": [
     {
+      "source": "https://help.leadsquared.com/feed/",
+      "feed_url": "https://help.leadsquared.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://help.leadsquared.com/",
       "feed_url": "https://help.leadsquared.com/feed/",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-08-22T20:20:02Z"
+  "post_count": 24,
+  "fetched": "2026-08-30T22:33:40Z"
 }
