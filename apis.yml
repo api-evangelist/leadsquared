@@ -129,6 +129,9 @@ apis:
   - type: Overlay
     url: overlays/leadsquared-leads-api-overlay.yaml
 common:
+  - type: CapabilityMap
+    url: capabilities/leadsquared-capability-edges.yml
+    name: LeadSquared Business Capability Map
   - type: AgenticAccess
     url: agentic-access/leadsquared-agentic-access.yml
   - type: DomainSecurity

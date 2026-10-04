@@ -1,0 +1,35 @@
+slug: leadsquared
+provider: LeadSquared
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Leads
+  spec_file: leadsquared-leads-api-openapi.yml
+  capability_id: BC-410.30
+  capability_id_l1: BC-410
+  capability_name: Opportunity & Pipeline Management
+  confidence: 0.85
+  evidence: POST /LeadManagement.svc/Lead.Create createLead Create a lead; "REST API for managing leads,
+    opportunities, and activities in LeadSquared"
+  reason: Operations create, retrieve and search leads — lead/opportunity lifecycle, i.e. Opportunity
+    & Pipeline Management within Sales Management. Customer data management is plausible but the explicit
+    'leads, opportunities' framing points to pipeline.
+- tag: Activities
+  spec_file: leadsquared-activities-api-openapi.yml
+  capability_id: BC-410.30
+  capability_id_l1: BC-410
+  capability_name: Opportunity & Pipeline Management
+  confidence: 0.7
+  evidence: POST /ProspectActivity.svc/Create  postActivity  Post an activity on a lead
+  reason: Records activities against leads in a CRM, i.e. tracking engagement through the lead/opportunity
+    lifecycle; thin surface (one operation) so confidence is moderate.
