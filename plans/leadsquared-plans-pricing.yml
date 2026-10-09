@@ -103,3 +103,38 @@ trial:
     https://www.leadsquared.com/free-trial/ redirects (HTTP 200 after redirect) to
     https://www.leadsquared.com/book-demo/ — there is no self-serve free trial;
     the entry point is a sales demo request.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units: []
+  plans:
+  - name: Sales Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Sales Super
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Marketing Pro
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Marketing Super
+    access: other
+    model: subscription
+    model_how: derived
+    units: []
+    periods:
+    - other
