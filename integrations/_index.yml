@@ -59,7 +59,6 @@
   arazzo: null
 - slug: leadsquared-linkedin-ads
   label: LinkedIn Ads
-  partner: linkedin-ads
   partner_name: LinkedIn Ads
   category: Ads & Conversion
   type: marketplace
@@ -67,7 +66,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/leadsquared/integrations/linkedin-ads
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: leadsquared-instapage
   label: Instapage
@@ -224,7 +223,6 @@
   arazzo: null
 - slug: leadsquared-microsoft-excel
   label: Microsoft Excel
-  partner: microsoft-excel
   partner_name: Microsoft Excel
   category: Microsoft
   type: marketplace
@@ -232,7 +230,7 @@
   channel: ipaas-usage
   evidence: https://zapier.com/apps/leadsquared/integrations/excel
   source: edge
-  status: pending-generation
+  status: pending-partner-spec
   arazzo: null
 - slug: leadsquared-calendly
   label: Calendly
@@ -372,4 +370,42 @@
   evidence: https://zapier.com/apps/leadsquared/integrations/webinarkit
   source: edge
   status: pending-partner-spec
+  arazzo: null
+- slug: leadsquared-zapier
+  label: Zapier
+  partner: zapier
+  partner_name: Zapier
+  type: marketplace
+  marketplace: zapier-directory
+  channel: ipaas-listing
+  evidence: https://zapier.com/apps/leadsquared/integrations
+  source: edge
+  relationship: ipaas-bridge
+  contract_reference:
+    register: Zapier app directory (zapier.com/api/v4/apps)
+    spec_file: null
+    role: ipaas-connector:zapier
+    registered_name: LeadSquared
+    matched_domain: leadsquared.com
+    matched_by: domain
+    detected_by: sweep-workflow-automation.py
+    detected: '2026-10-15'
+    signal_note: one edge per (provider, platform); actions, triggers and usage counts are context, never read
+    app_slug: leadsquared
+    beta: false
+    builder: unknown (not in the directory record)
+  status: pending-generation
+  arazzo: null
+- slug: leadsquared-wordpress-own
+  label: WordPress (own)
+  partner: wordpress
+  partner_name: WordPress (own)
+  category: WordPress plugin
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://wordpress.org/plugins/leadsquared-website-topbar/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
   arazzo: null
