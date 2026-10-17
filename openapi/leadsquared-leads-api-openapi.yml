@@ -117,6 +117,18 @@ paths:
                   $ref: '#/components/schemas/Lead'
 components:
   schemas:
+    LeadAttribute:
+      type: object
+      required:
+      - Attribute
+      - Value
+      properties:
+        Attribute:
+          type: string
+          example: EmailAddress
+        Value:
+          type: string
+          example: joe.pesci@example.com
     CreateResponse:
       type: object
       properties:
@@ -159,18 +171,6 @@ components:
           type: number
         EngagementScore:
           type: number
-    LeadAttribute:
-      type: object
-      required:
-      - Attribute
-      - Value
-      properties:
-        Attribute:
-          type: string
-          example: EmailAddress
-        Value:
-          type: string
-          example: joe.pesci@example.com
   securitySchemes:
     AccessKeyAuth:
       type: apiKey
