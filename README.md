@@ -1,4 +1,4 @@
-# LeadSquared (leadsquared)
+# LeadSquared
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,62 +66,147 @@
 
 LeadSquared is a marketing automation and CRM platform that helps businesses capture, manage, nurture, and convert leads across sales, marketing, and service workflows. It offers Sales CRM, Service CRM, marketing automation, field force automation, and a no-code/low-code platform for building industry-specific customer experiences. The LeadSquared REST API provides access to core platform resources like leads, opportunities, activities, tasks, and users using API key authentication.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/leadsquared/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/leadsquared/refs/heads/main/apis.yml)
+**Areas:** Marketing Automation · CRM · Sales Automation · Lead Management · Customer Engagement · Field Force Automation
 
-## Scope
+## LeadSquared on APIs.io
 
-- **Type:** Index
+Everything profiled for LeadSquared is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/leadsquared/](https://apis.io/providers/leadsquared/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (4)
 
-- Marketing Automation
-- CRM
-- Sales Automation
-- Lead Management
-- Customer Engagement
-- Field Force Automation
+- [LeadSquared REST API](https://apis.io/apis/leadsquared/rest-api/) — REST API for managing leads, opportunities, activities, tasks, users, campaigns, and other CRM resources in LeadSquared. Includes Sales CRM, Service CRM,…
+- [LeadSquared Async API](https://apis.io/apis/leadsquared/async-api/) — Queued, retrying variants of the highest-volume LeadSquared write operations — Capture Leads, Update a Lead, Post an Activity on a Lead, Create a Lead and…
+- [LeadSquared Activities API](https://apis.io/apis/leadsquared/leadsquared-activities-api/) — Activity events on leads
+- [LeadSquared Leads API](https://apis.io/apis/leadsquared/leadsquared-leads-api/) — Lead create, get, and search
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-11
-- **Modified:** 2026-05-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### LeadSquared REST API
+Event-driven and webhook contracts.
 
-REST API for managing leads, opportunities, activities, tasks, users, campaigns, and other CRM resources in LeadSquared. Includes Sales CRM, Service CRM, Async, and Portal APIs along with Lapps, Batch Jobs, Webhooks, and Mavis Database developer tools. Authentication uses AccessKey and SecretKey query parameters or headers tied to a region- specific API host.
+- [Leadsquared Webhooks](https://apis.io/asyncapis/leadsquared/leadsquared-webhooks/)
 
-- **Human URL:** [https://apidocs.leadsquared.com/overview/](https://apidocs.leadsquared.com/overview/)
-- **Base URL:** `https://api.leadsquared.com`
+#### MCP servers (1)
 
-#### Tags
+Model Context Protocol servers that expose the API to agents.
 
-- CRM
-- Marketing Automation
-- Lead Management
-- Sales CRM
-- Service CRM
+- [leadsquared](https://apis.io/servers/leadsquared/leadsquared/)
 
-#### Properties
+#### Agentic access (1)
 
-- [Documentation](https://apidocs.leadsquared.com/overview/)
-- [Authentication](https://apidocs.leadsquared.com/authentication/)
-- [A P I  Host](https://apidocs.leadsquared.com/api-host/)
-- [Postman  Collection](https://apidocs.leadsquared.com/leadsquared-run-in-postman/)
-- [Postman Collection](collections/leadsquared.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/leadsquared.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Common Properties
+- [Leadsquared Agentic Access](https://apis.io/agentic-access/leadsquared/leadsquared-agentic-access/)
 
-- [GitHub Organization](https://github.com/leadsquared)
-- [LinkedIn](https://www.linkedin.com/company/leadsquared)
+#### Collections (3)
+
+Postman and Open Collection request collections.
+
+- [LeadSquared REST API](https://apis.io/collections/leadsquared/open-leadsquared/)
+- [LeadSquared REST Activities API](https://apis.io/collections/leadsquared/open-leadsquared-activities-api/)
+- [LeadSquared REST Activities Leads API](https://apis.io/collections/leadsquared/open-leadsquared-leads-api/)
+
+#### Overlays (2)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Leadsquared Activities Api Overlay](https://apis.io/overlays/leadsquared/leadsquared-activities-api-overlay/)
+- [Leadsquared Leads Api Overlay](https://apis.io/overlays/leadsquared/leadsquared-leads-api-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Leadsquared Authentication](https://apis.io/security/leadsquared/leadsquared-authentication/)
+- [Leadsquared Domain Security](https://apis.io/security/leadsquared/leadsquared-domain-security/)
+- [Leadsquared Trust Center](https://apis.io/security/leadsquared/leadsquared-trust-center/)
+- [Leadsquared Vulnerability Disclosure](https://apis.io/security/leadsquared/leadsquared-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Leadsquared Plans Pricing](https://apis.io/plans/leadsquared/leadsquared-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Leadsquared Rate Limits](https://apis.io/rate-limits/leadsquared/leadsquared-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.leadsquared.com)
 - [Documentation](https://apidocs.leadsquared.com)
-- [Pricing](https://www.leadsquared.com/pricing/)
-- [Sign Up](https://www.leadsquared.com/free-trial/)
+- [Getting started](https://apidocs.leadsquared.com/getting-started/)
+- [API reference](https://apidocs.leadsquared.com/overview/)
+- [Pricing](https://www.leadsquared.com/marketing-automation-pricing/)
+- [Sign up](https://www.leadsquared.com/book-demo/)
+- [Support](https://help.leadsquared.com/)
+- [Blog](https://www.leadsquared.com/learn/)
+- [Security](https://www.leadsquared.com/security/)
+- [Compliance](https://www.leadsquared.com/security/)
+- [Terms of service](https://www.leadsquared.com/leadsquared-terms-of-service/)
+- [Privacy policy](https://www.leadsquared.com/privacy-policy/)
+- [GitHub](https://github.com/leadsquared)
+- [Status](https://status.leadsquared.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 54.4** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 50.7 |
+| Contract governance | 4.5 |
+| Operational transparency | 73.7 |
+| Developer ergonomics | 73.2 |
+| Access clarity | 46.1 |
+
+**Agent readiness 35.9** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 22.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/leadsquared/](https://apis.io/providers/leadsquared/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for LeadSquared: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/leadsquared/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
